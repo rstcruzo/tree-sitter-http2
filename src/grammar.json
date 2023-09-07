@@ -110,7 +110,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_identifier"
+              "name": "domain"
             },
             {
               "type": "SYMBOL",
@@ -403,6 +403,10 @@
     "identifier": {
       "type": "SYMBOL",
       "name": "_identifier"
+    },
+    "domain": {
+      "type": "PATTERN",
+      "value": "[A-Za-z-:\\d]+"
     },
     "string": {
       "type": "CHOICE",

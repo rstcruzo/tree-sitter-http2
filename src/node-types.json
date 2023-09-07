@@ -240,6 +240,10 @@
       "required": true,
       "types": [
         {
+          "type": "domain",
+          "named": true
+        },
+        {
           "type": "path",
           "named": true
         },
@@ -346,6 +350,10 @@
   {
     "type": "@",
     "named": false
+  },
+  {
+    "type": "domain",
+    "named": true
   },
   {
     "type": "rest_of_line",

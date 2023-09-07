@@ -27,7 +27,7 @@ module.exports = grammar({
             seq(
                 $.scheme,
                 "://",
-                choice($._identifier, $.variable_ref),
+                choice($.domain, $.variable_ref),
                 optional($.path),
                 optional($.query_params)
             ),
@@ -58,6 +58,7 @@ module.exports = grammar({
             ),
         variable_ref: () => token(prec(2, seq("{{", /[A-Za-z_.\d]+/, "}}"))),
         identifier: ($) => $._identifier,
+        domain: () => /[A-Za-z-:\d]+/,
         string: ($) =>
             choice(seq('"', $.variable_ref, '"'), seq('"', /[^"]*/, '"')),
         rest_of_line: () => /[^\n]+/,
