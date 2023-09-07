@@ -30,18 +30,16 @@ module.exports = grammar({
                     $.variable_ref
                 ),
                 optional($.path),
-                optional($.query_params)
+                optional($.query_params),
+                "\n"
             ),
         scheme: (_) =>
             /(about|acct|arcp|cap|cid|coap+tcp|coap+ws|coaps+tcp|coaps+ws|data|dns|example|file|ftp|geo|h323|http|https|im|info|ipp|mailto|mid|ni|nih|payto|pkcs11|pres|reload|secret-token|session|sms|tag|telnet|urn|ws|wss)/,
         _identifier: (_) => /[A-Za-z_.\d-]+/,
         path: ($) =>
-            prec.left(
-                2,
-                seq(
-                    repeat1(seq("/", choice($._identifier, $.variable_ref))),
-                    optional("/") // Trailing slash
-                )
+            seq(
+                repeat1(seq("/", choice($._identifier, $.variable_ref))),
+                optional("/") // Trailing slash
             ),
         query_params: ($) =>
             seq("?", $.query_param, repeat(seq("&", $.query_param))),
