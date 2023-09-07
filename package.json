@@ -1,0 +1,20 @@
+{
+  "type": "commonjs",
+  "dependencies": {
+    "nan": "^2.17.0",
+    "tree-sitter-cli": "^0.20.8"
+  },
+  "name": "tree-sitter-http2",
+  "version": "0.0.1",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "tree-sitter": [{
+    "scope": "source.http",
+    "file-types": ["http"]
+  }]
+}
