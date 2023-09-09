@@ -34,6 +34,11 @@
     }
   },
   {
+    "type": "http_version",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "identifier",
     "named": true,
     "fields": {}
@@ -205,6 +210,21 @@
     }
   },
   {
+    "type": "reason_phrase",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "rest_of_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "request",
     "named": true,
     "fields": {},
@@ -228,6 +248,25 @@
     }
   },
   {
+    "type": "response",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "header",
+          "named": true
+        },
+        {
+          "type": "status_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -240,7 +279,34 @@
           "named": true
         },
         {
+          "type": "response",
+          "named": true
+        },
+        {
           "type": "variable_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "status_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "http_version",
+          "named": true
+        },
+        {
+          "type": "reason_phrase",
+          "named": true
+        },
+        {
+          "type": "status_code",
           "named": true
         }
       ]
@@ -382,6 +448,10 @@
     "named": false
   },
   {
+    "type": "HTTP/",
+    "named": false
+  },
+  {
     "type": "domain",
     "named": true
   },
@@ -391,6 +461,10 @@
   },
   {
     "type": "scheme",
+    "named": true
+  },
+  {
+    "type": "status_code",
     "named": true
   },
   {

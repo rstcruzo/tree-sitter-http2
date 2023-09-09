@@ -13,9 +13,98 @@
           {
             "type": "SYMBOL",
             "name": "variable_declaration"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "response"
           }
         ]
       }
+    },
+    "status_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "http_version"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "status_code"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "reason_phrase"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "[\\r\\n]+"
+          }
+        }
+      ]
+    },
+    "response": {
+      "type": "PREC_LEFT",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "status_line"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "header"
+                },
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[\\r\\n]+"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "http_version": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "HTTP/"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[\\d\\.]+"
+        }
+      ]
+    },
+    "status_code": {
+      "type": "PATTERN",
+      "value": "\\d+"
+    },
+    "reason_phrase": {
+      "type": "SYMBOL",
+      "name": "rest_of_line"
     },
     "request": {
       "type": "PREC_LEFT",

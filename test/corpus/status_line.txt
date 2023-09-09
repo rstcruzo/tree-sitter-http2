@@ -1,0 +1,31 @@
+=====================
+OK response
+=====================
+HTTP/1.1 200 OK
+
+---
+
+(source_file
+  (response
+   (status_line
+    (http_version)
+    (status_code)
+    (reason_phrase (rest_of_line)))))
+
+=====================
+400 response with headers
+=====================
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+---
+
+(source_file
+  (response
+   (status_line
+    (http_version)
+    (status_code)
+    (reason_phrase (rest_of_line)))
+   (header
+    (identifier)
+    (rest_of_line))))

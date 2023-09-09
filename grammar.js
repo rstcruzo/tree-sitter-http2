@@ -6,7 +6,22 @@ module.exports = grammar({
     extras: () => [],
 
     rules: {
-        source_file: ($) => repeat(choice($.request, $.variable_declaration)),
+        source_file: ($) =>
+            repeat(choice($.request, $.variable_declaration, $.response)),
+        status_line: ($) =>
+            seq(
+                $.http_version,
+                $._whitespace,
+                $.status_code,
+                $._whitespace,
+                $.reason_phrase,
+                new_line
+            ),
+        response: ($) =>
+            prec.left(2, seq($.status_line, repeat(seq($.header, new_line)))),
+        http_version: () => seq("HTTP/", /[\d\.]+/),
+        status_code: () => /\d+/,
+        reason_phrase: ($) => $.rest_of_line,
         request: ($) =>
             prec.left(
                 2,
