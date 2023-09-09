@@ -6,3 +6,6 @@
 
 (key) @property
 (string) @string
+
+(status_code) @property
+(reason_phrase) @keyword
