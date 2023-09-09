@@ -6,23 +6,24 @@ module.exports = grammar({
     extras: () => [],
 
     rules: {
-        source_file: ($) =>
-            repeat(
-                choice(
+        source_file: ($) => repeat(choice($.request, $.variable_declaration)),
+        request: ($) =>
+            prec.left(
+                2,
+                seq(
                     $.method_url,
-                    $.header,
-                    $.variable_declaration,
-                    $.json_body
+                    new_line,
+                    repeat(seq($.header, new_line)),
+                    optional($.json_body)
                 )
             ),
-        method_url: ($) => seq($.method, $._whitespace, $.url, new_line),
+        method_url: ($) => seq($.method, $._whitespace, $.url),
         header: ($) =>
             seq(
                 field("header_name", choice($.identifier, $.variable_ref)),
                 ":",
                 $._whitespace,
-                field("header_value", choice($.rest_of_line, $.variable_ref)),
-                new_line
+                field("header_value", choice($.rest_of_line, $.variable_ref))
             ),
         method: ($) =>
             choice(

@@ -6,7 +6,8 @@ GET http://localhost/
 ---
 
 (source_file
-  (method_url (method) (url (scheme) (domain) (path))))
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))))
 
 =====================
 Simple GET method without trailing slash
@@ -16,7 +17,8 @@ GET http://localhost
 ---
 
 (source_file
-  (method_url (method) (url (scheme) (domain))))
+  (request
+   (method_url (method) (url (scheme) (domain)))))
 
 =====================
 GET method with path
@@ -26,7 +28,8 @@ GET http://localhost/path/another_path
 ---
 
 (source_file
-  (method_url (method) (url (scheme) (domain) (path))))
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))))
 
 =====================
 GET method with port
@@ -36,7 +39,8 @@ GET http://localhost:5000/path/another_path
 ---
 
 (source_file
-  (method_url (method) (url (scheme) (domain) (path))))
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))))
 
 =====================
 GET method with ip
@@ -46,7 +50,8 @@ GET http://127.0.0.7/path/another_path
 ---
 
 (source_file
-  (method_url (method) (url (scheme) (domain) (path))))
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))))
 
 =====================
 GET method with ip and port
@@ -56,7 +61,8 @@ GET http://127.0.0.7:5000/path/another_path
 ---
 
 (source_file
-  (method_url (method) (url (scheme) (domain) (path))))
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))))
 
 =====================
 GET method with full domain
@@ -66,7 +72,8 @@ GET https://blog-staging2.rstcruzo.com:80/path/another_path
 ---
 
 (source_file
-  (method_url (method) (url (scheme) (domain) (path))))
+ (request
+  (method_url (method) (url (scheme) (domain) (path)))))
 
 =====================
 GET method with query params
@@ -76,11 +83,12 @@ GET http://localhost?param=1
 ---
 
 (source_file
-  (method_url
+  (request
+   (method_url
     (method)
     (url
-      (scheme)
+     (scheme)
       (domain)
       (query_params
         (query_param parameter_name: (identifier)
-                     parameter_value: (identifier))))))
+                     parameter_value: (identifier)))))))
