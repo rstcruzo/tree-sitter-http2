@@ -49,7 +49,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "key_value_list",
@@ -106,6 +106,36 @@
       "types": [
         {
           "type": "key_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "list_values",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "list_values",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "value",
           "named": true
         }
       ]
@@ -375,6 +405,10 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -449,6 +483,14 @@
   },
   {
     "type": "HTTP/",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
     "named": false
   },
   {

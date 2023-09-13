@@ -1,0 +1,191 @@
+=====================
+Simple JSON body
+=====================
+POST http://localhost/
+
+{
+  "key": "value"
+}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body
+     (key_value_list
+       (key_value
+         (key (identifier)) (value (string)))))))
+
+=====================
+Empty JSON body
+=====================
+POST http://localhost/
+
+{
+}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body)))
+
+=====================
+Larger JSON body
+=====================
+POST http://localhost/
+
+{
+  "key": "value",
+  "key": "value",
+  "key": "value"
+}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body
+     (key_value_list
+       (key_value
+         (key (identifier)) (value (string)))
+       (key_value
+         (key (identifier)) (value (string)))
+       (key_value
+         (key (identifier)) (value (string)))))))
+
+=====================
+One line JSON body
+=====================
+POST http://localhost/
+
+{"key": "value"}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body
+     (key_value_list
+       (key_value
+         (key (identifier)) (value (string)))))))
+
+=====================
+One line JSON body with random spaces.
+=====================
+POST http://localhost/
+
+{  "key"   : "value" }
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body
+     (key_value_list
+       (key_value
+         (key (identifier)) (value (string)))))))
+
+=====================
+Nested JSON
+=====================
+POST http://localhost/
+
+{
+  "nested": {
+    "key": "value"
+  }
+}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body
+     (key_value_list
+       (key_value
+         (key (identifier))
+         (value
+          (json_body
+           (key_value_list
+            (key_value
+             (key (identifier))
+             (value (string)))))))))))
+
+=====================
+JSON body with a list
+=====================
+POST http://localhost/
+
+{
+  "key": ["first", "second"]
+}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body
+     (key_value_list
+       (key_value
+         (key (identifier)) (value (list (list_values (value (string)) (value (string))))))))))
+
+=====================
+JSON body with an empty list
+=====================
+POST http://localhost/
+
+{
+  "key": []
+}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body
+     (key_value_list
+       (key_value
+         (key (identifier)) (value (list)))))))
+
+=====================
+JSON body with a list of objects
+=====================
+POST http://localhost/
+
+{
+  "key": [{
+    "name": "value"
+  }, {
+    "name": "value"
+  }]
+}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body
+     (key_value_list
+       (key_value
+         (key (identifier)) (value
+           (list
+            (list_values
+             (value
+              (json_body (key_value_list
+                          (key_value
+                           (key (identifier)) (value (string))))))
+             (value
+              (json_body (key_value_list
+                          (key_value
+                           (key (identifier)) (value (string))))))))))))))
+

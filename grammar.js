@@ -1,43 +1,36 @@
-const new_line = token.immediate(/[\r\n]+/);
-
 module.exports = grammar({
     name: "http2",
 
-    extras: () => [],
+    extras: () => [/\s/],
 
     rules: {
         source_file: ($) =>
             repeat(choice($.request, $.variable_declaration, $.response)),
-        status_line: ($) =>
-            seq(
-                $.http_version,
-                $._whitespace,
-                $.status_code,
-                $._whitespace,
-                $.reason_phrase,
-                new_line
-            ),
-        response: ($) =>
-            prec.left(2, seq($.status_line, repeat(seq($.header, new_line)))),
-        http_version: () => seq("HTTP/", /[\d\.]+/),
-        status_code: () => /\d+/,
-        reason_phrase: ($) => $.rest_of_line,
         request: ($) =>
             prec.left(
                 2,
                 seq(
                     $.method_url,
-                    new_line,
-                    repeat(seq($.header, new_line)),
+                    $._new_line,
+                    repeat(seq($.header, $._new_line)),
                     optional($.json_body)
                 )
             ),
-        method_url: ($) => seq($.method, $._whitespace, $.url),
+        method_url: ($) => seq($.method, $.url),
+        response: ($) =>
+            prec.left(
+                2,
+                seq($.status_line, repeat(seq($.header, $._new_line)))
+            ),
+        status_line: ($) =>
+            seq($.http_version, $.status_code, $.reason_phrase, $._new_line),
+        http_version: () => seq("HTTP/", /[\d\.]+/),
+        status_code: () => /\d+/,
+        reason_phrase: ($) => $.rest_of_line,
         header: ($) =>
             seq(
                 field("header_name", choice($.identifier, $.variable_ref)),
                 ":",
-                $._whitespace,
                 field("header_value", choice($.rest_of_line, $.variable_ref))
             ),
         method: ($) =>
@@ -73,30 +66,26 @@ module.exports = grammar({
                 "=",
                 field("parameter_value", choice($.identifier, $.variable_ref))
             ),
-        json_body: ($) =>
-            seq("{", new_line, $.key_value_list, "}", new_line, new_line),
+        json_body: ($) => seq("{", optional($.key_value_list), "}"),
         key_value_list: ($) =>
-            seq($.key_value, repeat(seq(",", new_line, $.key_value)), new_line),
-        key_value: ($) =>
             seq(
-                optional($._whitespace),
-                $.key,
-                ":",
-                optional($._whitespace),
-                $.value
+                $.key_value,
+                repeat(seq(",", optional($._new_line), $.key_value)),
+                optional($._new_line)
             ),
+        key_value: ($) => seq($.key, ":", $.value),
         key: ($) => seq('"', choice($.identifier, $.variable_ref), '"'),
         value: ($) =>
-            choice($.string, $.identifier, $.json_body, $.variable_ref),
+            choice($.string, $.identifier, $.json_body, $.variable_ref, $.list),
+        list: ($) => seq("[", optional($.list_values), "]"),
+        list_values: ($) => seq($.value, repeat(seq(",", $.value))),
         variable_declaration: ($) =>
             seq(
                 "@",
                 field("variable_name", $.identifier),
-                optional($._whitespace),
                 "=",
-                optional($._whitespace),
                 field("variable_value", $.rest_of_line),
-                new_line
+                $._new_line
             ),
         variable_ref: () => token(prec(2, seq("{{", /[A-Za-z_\.\d]+/, "}}"))),
         identifier: ($) => $._identifier,
@@ -104,6 +93,6 @@ module.exports = grammar({
         domain: () => /[A-Za-z\-:\.\d]+/,
         string: ($) =>
             choice(seq('"', $.variable_ref, '"'), seq('"', /[^"\n]*/, '"')),
-        _whitespace: () => /[\t\v ]+/,
+        _new_line: () => token.immediate(/[\r\n]+/),
     },
 });
