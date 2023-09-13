@@ -33,6 +33,24 @@ POST http://localhost/
    (json_body)))
 
 =====================
+List JSON body
+=====================
+POST http://localhost/
+
+[
+  "key", "key2"
+]
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (json_body
+     (list
+       (list_values (value (string)) (value (string)))))))
+
+=====================
 Larger JSON body
 =====================
 POST http://localhost/

@@ -66,7 +66,8 @@ module.exports = grammar({
                 "=",
                 field("parameter_value", choice($.identifier, $.variable_ref))
             ),
-        json_body: ($) => seq("{", optional($.key_value_list), "}"),
+        json_body: ($) =>
+            choice(seq("{", optional($.key_value_list), "}"), $.list),
         key_value_list: ($) =>
             seq(
                 $.key_value,
@@ -76,7 +77,16 @@ module.exports = grammar({
         key_value: ($) => seq($.key, ":", $.value),
         key: ($) => seq('"', choice($.identifier, $.variable_ref), '"'),
         value: ($) =>
-            choice($.string, $.identifier, $.json_body, $.variable_ref, $.list),
+            prec(
+                2,
+                choice(
+                    $.string,
+                    $.identifier,
+                    $.json_body,
+                    $.variable_ref,
+                    $.list
+                )
+            ),
         list: ($) => seq("[", optional($.list_values), "]"),
         list_values: ($) => seq($.value, repeat(seq(",", $.value))),
         variable_declaration: ($) =>

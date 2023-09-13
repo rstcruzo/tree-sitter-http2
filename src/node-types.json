@@ -54,6 +54,10 @@
         {
           "type": "key_value_list",
           "named": true
+        },
+        {
+          "type": "list",
+          "named": true
         }
       ]
     }
