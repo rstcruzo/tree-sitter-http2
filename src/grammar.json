@@ -653,7 +653,7 @@
             },
             {
               "type": "PATTERN",
-              "value": "[A-Za-z_\\.\\d]+"
+              "value": "[A-Za-z_\\.\\d]*"
             },
             {
               "type": "STRING",

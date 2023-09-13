@@ -1,0 +1,11 @@
+=====================
+Empty variable name (useful for completion)
+=====================
+GET http://{{}}/
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (variable_ref) (path)))))
+
