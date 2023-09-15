@@ -45,7 +45,7 @@ module.exports = grammar({
                     $.variable_ref
                 ),
                 optional($.path),
-                optional($.query_params)
+                optional(seq("?", optional($.query_params)))
             ),
         scheme: (_) =>
             /(about|acct|arcp|cap|cid|coap+tcp|coap+ws|coaps+tcp|coaps+ws|data|dns|example|file|ftp|geo|h323|http|https|im|info|ipp|mailto|mid|ni|nih|payto|pkcs11|pres|reload|secret-token|session|sms|tag|telnet|urn|ws|wss)/,
@@ -59,7 +59,7 @@ module.exports = grammar({
                 "/" // Path is only the trailing slash
             ),
         query_params: ($) =>
-            seq("?", $.query_param, repeat(seq("&", $.query_param))),
+            seq($.query_param, repeat(seq("&", $.query_param))),
         query_param: ($) =>
             seq(
                 field("parameter_name", choice($.identifier, $.variable_ref)),

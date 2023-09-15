@@ -260,8 +260,25 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "query_params"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "?"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "query_params"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -332,10 +349,6 @@
     "query_params": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "STRING",
-          "value": "?"
-        },
         {
           "type": "SYMBOL",
           "name": "query_param"

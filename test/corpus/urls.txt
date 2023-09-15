@@ -92,3 +92,21 @@ GET http://localhost?param=1
       (query_params
         (query_param parameter_name: (identifier)
                      parameter_value: (identifier)))))))
+
+=====================
+GET method empty query params
+=====================
+GET http://localhost/params?
+Content-Type: application/json
+
+---
+
+(source_file
+  (request
+   (method_url
+    (method)
+    (url
+     (scheme)
+     (domain)
+      (path)))
+   (header (identifier) (rest_of_line))))
