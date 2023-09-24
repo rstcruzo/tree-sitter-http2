@@ -26,12 +26,18 @@ module.exports = grammar({
             seq($.http_version, $.status_code, $.reason_phrase, $._new_line),
         http_version: () => seq("HTTP/", /[\d\.]+/),
         status_code: () => /\d+/,
-        reason_phrase: ($) => $.rest_of_line,
+        reason_phrase: ($) => seq($._kill_leading_whitespace, $.rest_of_line),
         header: ($) =>
             seq(
                 field("header_name", choice($.identifier, $.variable_ref)),
                 ":",
-                field("header_value", choice($.rest_of_line, $.variable_ref))
+                field(
+                    "header_value",
+                    choice(
+                        seq($._kill_leading_whitespace, $.rest_of_line),
+                        seq($._kill_leading_whitespace, $.variable_ref)
+                    )
+                )
             ),
         method: ($) =>
             choice(
@@ -94,11 +100,15 @@ module.exports = grammar({
                 "@",
                 field("variable_name", $.identifier),
                 "=",
-                field("variable_value", $.rest_of_line),
+                field(
+                    "variable_value",
+                    seq($._kill_leading_whitespace, $.rest_of_line)
+                ),
                 $._new_line
             ),
         variable_ref: () => token(prec(2, seq("{{", /[A-Za-z_\.\d]*/, "}}"))),
         identifier: ($) => $._identifier,
+        _kill_leading_whitespace: () => /[\s]*/,
         rest_of_line: () => /[^\n]+/,
         domain: () => /[A-Za-z\-:\.\d]+/,
         string: ($) =>

@@ -18,7 +18,7 @@
         ]
       },
       "header_value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -438,7 +438,7 @@
         ]
       },
       "variable_value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {

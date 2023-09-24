@@ -147,8 +147,17 @@
       "value": "\\d+"
     },
     "reason_phrase": {
-      "type": "SYMBOL",
-      "name": "rest_of_line"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_kill_leading_whitespace"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "rest_of_line"
+        }
+      ]
     },
     "header": {
       "type": "SEQ",
@@ -181,12 +190,30 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "rest_of_line"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_kill_leading_whitespace"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "rest_of_line"
+                  }
+                ]
               },
               {
-                "type": "SYMBOL",
-                "name": "variable_ref"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_kill_leading_whitespace"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "variable_ref"
+                  }
+                ]
               }
             ]
           }
@@ -642,8 +669,17 @@
           "type": "FIELD",
           "name": "variable_value",
           "content": {
-            "type": "SYMBOL",
-            "name": "rest_of_line"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_kill_leading_whitespace"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "rest_of_line"
+              }
+            ]
           }
         },
         {
@@ -679,6 +715,10 @@
     "identifier": {
       "type": "SYMBOL",
       "name": "_identifier"
+    },
+    "_kill_leading_whitespace": {
+      "type": "PATTERN",
+      "value": "[\\s]*"
     },
     "rest_of_line": {
       "type": "PATTERN",
