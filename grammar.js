@@ -85,13 +85,7 @@ module.exports = grammar({
         value: ($) =>
             prec(
                 2,
-                choice(
-                    $.string,
-                    $.identifier,
-                    $.json_body,
-                    $.variable_ref,
-                    $.list
-                )
+                choice($.string, $.number, $.json_body, $.variable_ref, $.list)
             ),
         list: ($) => seq("[", optional($.list_values), "]"),
         list_values: ($) => seq($.value, repeat(seq(",", $.value))),
@@ -111,6 +105,7 @@ module.exports = grammar({
         _kill_leading_whitespace: () => /[\s]*/,
         rest_of_line: () => /[^\n]+/,
         domain: () => /[A-Za-z\-:\.\d]+/,
+        number: () => /[0-9\.]+/,
         string: ($) =>
             choice(seq('"', $.variable_ref, '"'), seq('"', /[^"\n]*/, '"')),
         _new_line: () => token.immediate(/[\r\n]+/),

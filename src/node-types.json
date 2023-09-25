@@ -401,15 +401,15 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "json_body",
           "named": true
         },
         {
           "type": "list",
+          "named": true
+        },
+        {
+          "type": "number",
           "named": true
         },
         {
@@ -499,6 +499,10 @@
   },
   {
     "type": "domain",
+    "named": true
+  },
+  {
+    "type": "number",
     "named": true
   },
   {

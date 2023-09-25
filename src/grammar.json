@@ -579,7 +579,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "number"
           },
           {
             "type": "SYMBOL",
@@ -727,6 +727,10 @@
     "domain": {
       "type": "PATTERN",
       "value": "[A-Za-z\\-:\\.\\d]+"
+    },
+    "number": {
+      "type": "PATTERN",
+      "value": "[0-9\\.]+"
     },
     "string": {
       "type": "CHOICE",
