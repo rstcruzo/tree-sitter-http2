@@ -604,6 +604,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "boolean"
+          },
+          {
+            "type": "SYMBOL",
             "name": "json_body"
           },
           {
@@ -820,6 +824,10 @@
     "number": {
       "type": "PATTERN",
       "value": "[0-9\\.]+"
+    },
+    "boolean": {
+      "type": "PATTERN",
+      "value": "(true|false)"
     },
     "string": {
       "type": "CHOICE",

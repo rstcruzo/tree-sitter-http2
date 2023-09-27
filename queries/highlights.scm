@@ -7,7 +7,8 @@
 (json_key_value key: _* @property)
 (url_encoded_key_value key: (identifier) @property)
 (string) @string
-(number) @constant
+(number) @number
+(boolean) @boolean
 
 (status_code) @property
 (reason_phrase) @keyword

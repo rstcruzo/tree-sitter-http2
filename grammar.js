@@ -90,6 +90,7 @@ module.exports = grammar({
                 choice(
                     $.string,
                     $.number,
+                    $.boolean,
                     $.json_body,
                     $.variable_ref,
                     $.json_list,
@@ -126,6 +127,7 @@ module.exports = grammar({
         rest_of_line: () => /[^\n]+/,
         domain: () => /[A-Za-z\-:\.\d]+/,
         number: () => /[0-9\.]+/,
+        boolean: () => /(true|false)/,
         string: ($) =>
             choice(seq('"', $.variable_ref, '"'), seq('"', /[^"\n]*/, '"')),
         _new_line: () => token.immediate(/[\r\n]+/),
