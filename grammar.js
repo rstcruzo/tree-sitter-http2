@@ -104,7 +104,11 @@ module.exports = grammar({
                 repeat(seq("&", $.url_encoded_key_value)),
             ),
         url_encoded_key_value: ($) =>
-            seq(field("key", $.identifier), "=", field("value", $.identifier)),
+            seq(
+                field("key", choice($.identifier, $.variable_ref)),
+                "=",
+                field("value", choice($.identifier, $.variable_ref)),
+            ),
         variable_declaration: ($) =>
             seq(
                 "@",

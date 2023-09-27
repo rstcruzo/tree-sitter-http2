@@ -15,3 +15,21 @@ username=user&password=pwd
      (identifier) (identifier))
     (url_encoded_key_value
      (identifier) (identifier)))))
+
+=====================
+URL encoded body with variables
+=====================
+POST http://localhost/
+
+username={{user}}&password=pwd
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (url_encoded_body
+    (url_encoded_key_value
+     (identifier) (variable_ref))
+    (url_encoded_key_value
+     (identifier) (identifier)))))

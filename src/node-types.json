@@ -420,6 +420,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "variable_ref",
+            "named": true
           }
         ]
       },
@@ -429,6 +433,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "variable_ref",
             "named": true
           }
         ]
