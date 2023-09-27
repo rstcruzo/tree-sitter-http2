@@ -4,7 +4,7 @@ Simple JSON body
 POST http://localhost/
 
 {
-  "key": "value"
+  "json_key": "json_value"
 }
 
 ---
@@ -13,9 +13,8 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-     (key_value_list
-       (key_value
-         (key (identifier)) (value (string)))))))
+    (json_key_value
+     (identifier) (string)))))
 
 =====================
 Empty JSON body
@@ -38,7 +37,7 @@ List JSON body
 POST http://localhost/
 
 [
-  "key", "key2"
+  "json_key", "key2"
 ]
 
 ---
@@ -47,8 +46,8 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-     (list
-       (list_values (value (string)) (value (string)))))))
+     (json_list
+      (string) (string)))))
 
 =====================
 Larger JSON body
@@ -56,9 +55,9 @@ Larger JSON body
 POST http://localhost/
 
 {
-  "key": "value",
-  "key": "value",
-  "key": "value"
+  "json_key": "json_value",
+  "json_key": "json_value",
+  "json_key": "json_value"
 }
 
 ---
@@ -67,20 +66,19 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-     (key_value_list
-       (key_value
-         (key (identifier)) (value (string)))
-       (key_value
-         (key (identifier)) (value (string)))
-       (key_value
-         (key (identifier)) (value (string)))))))
+    (json_key_value
+     (identifier) (string))
+    (json_key_value
+     (identifier) (string))
+    (json_key_value
+     (identifier) (string)))))
 
 =====================
 One line JSON body
 =====================
 POST http://localhost/
 
-{"key": "value"}
+{"json_key": "json_value"}
 
 ---
 
@@ -88,16 +86,15 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-     (key_value_list
-       (key_value
-         (key (identifier)) (value (string)))))))
+    (json_key_value
+     (identifier) (string)))))
 
 =====================
 One line JSON body with random spaces.
 =====================
 POST http://localhost/
 
-{  "key"   : "value" }
+{  "json_key"   : "json_value" }
 
 ---
 
@@ -105,9 +102,8 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-     (key_value_list
-       (key_value
-         (key (identifier)) (value (string)))))))
+    (json_key_value
+     (identifier) (string)))))
 
 =====================
 Nested JSON
@@ -116,7 +112,7 @@ POST http://localhost/
 
 {
   "nested": {
-    "key": "value"
+    "json_key": "json_value"
   }
 }
 
@@ -126,23 +122,20 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-     (key_value_list
-       (key_value
-         (key (identifier))
-         (value
-          (json_body
-           (key_value_list
-            (key_value
-             (key (identifier))
-             (value (string)))))))))))
+    (json_key_value
+     (identifier)
+      (json_body
+       (json_key_value
+        (identifier)
+        (string)))))))
 
 =====================
-JSON body with a list
+JSON body with a json_list
 =====================
 POST http://localhost/
 
 {
-  "key": ["first", "second"]
+  "json_key": ["first", "second"]
 }
 
 ---
@@ -151,17 +144,16 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-     (key_value_list
-       (key_value
-         (key (identifier)) (value (list (list_values (value (string)) (value (string))))))))))
+    (json_key_value
+     (identifier) (json_list (string) (string))))))
 
 =====================
-JSON body with an empty list
+JSON body with an empty json_list
 =====================
 POST http://localhost/
 
 {
-  "key": []
+  "json_key": []
 }
 
 ---
@@ -170,20 +162,19 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-     (key_value_list
-       (key_value
-         (key (identifier)) (value (list)))))))
+    (json_key_value
+     (identifier) (json_list)))))
 
 =====================
-JSON body with a list of objects
+JSON body with a json_list of objects
 =====================
 POST http://localhost/
 
 {
-  "key": [{
-    "name": "value"
+  "json_key": [{
+    "name": "json_value"
   }, {
-    "name": "value"
+    "name": "json_value"
   }]
 }
 
@@ -193,17 +184,13 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-     (key_value_list
-       (key_value
-         (key (identifier)) (value
-           (list
-            (list_values
-             (value
-              (json_body (key_value_list
-                          (key_value
-                           (key (identifier)) (value (string))))))
-             (value
-              (json_body (key_value_list
-                          (key_value
-                           (key (identifier)) (value (string))))))))))))))
+    (json_key_value
+     (identifier)
+       (json_list
+          (json_body
+           (json_key_value
+            (identifier) (string)))
+          (json_body
+           (json_key_value
+            (identifier) (string))))))))
 

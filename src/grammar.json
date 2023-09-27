@@ -56,7 +56,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "json_body"
+                "name": "_body"
               },
               {
                 "type": "BLANK"
@@ -441,6 +441,19 @@
         }
       ]
     },
+    "_body": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "json_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "url_encoded_body"
+        }
+      ]
+    },
     "json_body": {
       "type": "CHOICE",
       "members": [
@@ -456,7 +469,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "key_value_list"
+                  "name": "_key_value_list"
                 },
                 {
                   "type": "BLANK"
@@ -471,16 +484,16 @@
         },
         {
           "type": "SYMBOL",
-          "name": "list"
+          "name": "json_list"
         }
       ]
     },
-    "key_value_list": {
+    "_key_value_list": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "key_value"
+          "name": "json_key_value"
         },
         {
           "type": "REPEAT",
@@ -505,7 +518,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "key_value"
+                "name": "json_key_value"
               }
             ]
           }
@@ -524,24 +537,32 @@
         }
       ]
     },
-    "key_value": {
+    "json_key_value": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "key"
+          "type": "FIELD",
+          "name": "key",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_json_key"
+          }
         },
         {
           "type": "STRING",
           "value": ":"
         },
         {
-          "type": "SYMBOL",
-          "name": "value"
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_json_value"
+          }
         }
       ]
     },
-    "key": {
+    "_json_key": {
       "type": "SEQ",
       "members": [
         {
@@ -567,7 +588,7 @@
         }
       ]
     },
-    "value": {
+    "_json_value": {
       "type": "PREC",
       "value": 2,
       "content": {
@@ -591,12 +612,12 @@
           },
           {
             "type": "SYMBOL",
-            "name": "list"
+            "name": "json_list"
           }
         ]
       }
     },
-    "list": {
+    "json_list": {
       "type": "SEQ",
       "members": [
         {
@@ -608,7 +629,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "list_values"
+              "name": "_json_list_values"
             },
             {
               "type": "BLANK"
@@ -621,12 +642,12 @@
         }
       ]
     },
-    "list_values": {
+    "_json_list_values": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "value"
+          "name": "_json_value"
         },
         {
           "type": "REPEAT",
@@ -639,9 +660,59 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "value"
+                "name": "_json_value"
               }
             ]
+          }
+        }
+      ]
+    },
+    "url_encoded_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "url_encoded_key_value"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "&"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "url_encoded_key_value"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "url_encoded_key_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "key",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
           }
         }
       ]

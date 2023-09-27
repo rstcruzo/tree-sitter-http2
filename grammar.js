@@ -13,7 +13,7 @@ module.exports = grammar({
                     $.method_url,
                     $._new_line,
                     repeat(seq($.header, $._new_line)),
-                    optional($.json_body),
+                    optional($._body),
                 ),
             ),
         method_url: ($) => seq($.method, $.url),
@@ -72,23 +72,39 @@ module.exports = grammar({
                 "=",
                 field("parameter_value", choice($.identifier, $.variable_ref)),
             ),
+        _body: ($) => choice($.json_body, $.url_encoded_body),
         json_body: ($) =>
-            choice(seq("{", optional($.key_value_list), "}"), $.list),
-        key_value_list: ($) =>
+            choice(seq("{", optional($._key_value_list), "}"), $.json_list),
+        _key_value_list: ($) =>
             seq(
-                $.key_value,
-                repeat(seq(",", optional($._new_line), $.key_value)),
+                $.json_key_value,
+                repeat(seq(",", optional($._new_line), $.json_key_value)),
                 optional($._new_line),
             ),
-        key_value: ($) => seq($.key, ":", $.value),
-        key: ($) => seq('"', choice($.identifier, $.variable_ref), '"'),
-        value: ($) =>
+        json_key_value: ($) =>
+            seq(field("key", $._json_key), ":", field("value", $._json_value)),
+        _json_key: ($) => seq('"', choice($.identifier, $.variable_ref), '"'),
+        _json_value: ($) =>
             prec(
                 2,
-                choice($.string, $.number, $.json_body, $.variable_ref, $.list),
+                choice(
+                    $.string,
+                    $.number,
+                    $.json_body,
+                    $.variable_ref,
+                    $.json_list,
+                ),
             ),
-        list: ($) => seq("[", optional($.list_values), "]"),
-        list_values: ($) => seq($.value, repeat(seq(",", $.value))),
+        json_list: ($) => seq("[", optional($._json_list_values), "]"),
+        _json_list_values: ($) =>
+            seq($._json_value, repeat(seq(",", $._json_value))),
+        url_encoded_body: ($) =>
+            seq(
+                $.url_encoded_key_value,
+                repeat(seq("&", $.url_encoded_key_value)),
+            ),
+        url_encoded_key_value: ($) =>
+            seq(field("key", $.identifier), "=", field("value", $.identifier)),
         variable_declaration: ($) =>
             seq(
                 "@",
