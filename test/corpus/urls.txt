@@ -10,6 +10,17 @@ GET http://localhost/
    (method_url (method) (url (scheme) (domain) (path)))))
 
 =====================
+Simple GET method with HTTP version
+=====================
+GET http://localhost HTTP/1.1
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain)) (http_version))))
+
+=====================
 Simple GET method without trailing slash
 =====================
 GET http://localhost

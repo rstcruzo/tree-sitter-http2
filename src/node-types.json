@@ -175,6 +175,10 @@
       "required": true,
       "types": [
         {
+          "type": "http_version",
+          "named": true
+        },
+        {
           "type": "method",
           "named": true
         },

@@ -76,6 +76,18 @@
         {
           "type": "SYMBOL",
           "name": "url"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "http_version"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

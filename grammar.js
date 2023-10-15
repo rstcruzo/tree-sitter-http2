@@ -16,7 +16,7 @@ module.exports = grammar({
                     optional($._body),
                 ),
             ),
-        method_url: ($) => seq($.method, $.url),
+        method_url: ($) => seq($.method, $.url, optional($.http_version)),
         response: ($) =>
             prec.left(
                 2,
