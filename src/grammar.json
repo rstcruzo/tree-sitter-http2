@@ -168,17 +168,8 @@
       "value": "\\d+"
     },
     "reason_phrase": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_kill_leading_whitespace"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "rest_of_line"
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "rest_of_line"
     },
     "header": {
       "type": "SEQ",
@@ -208,17 +199,8 @@
           "type": "FIELD",
           "name": "header_value",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_kill_leading_whitespace"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "rest_of_line_dynamic"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "rest_of_line_dynamic"
           }
         }
       ]
@@ -860,17 +842,8 @@
           "type": "FIELD",
           "name": "variable_value",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_kill_leading_whitespace"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "rest_of_line"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "rest_of_line"
           }
         },
         {
@@ -880,36 +853,25 @@
       ]
     },
     "variable_ref": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 2,
-        "content": {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "{{"
-            },
-            {
-              "type": "PATTERN",
-              "value": "[A-Za-z_\\.\\d]*"
-            },
-            {
-              "type": "STRING",
-              "value": "}}"
-            }
-          ]
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{{"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[A-Za-z_\\.\\d]*"
+        },
+        {
+          "type": "STRING",
+          "value": "}}"
         }
-      }
+      ]
     },
     "identifier": {
       "type": "SYMBOL",
       "name": "_identifier"
-    },
-    "_kill_leading_whitespace": {
-      "type": "PATTERN",
-      "value": "[\\s]*"
     },
     "request_delimiter": {
       "type": "PATTERN",
