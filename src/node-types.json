@@ -497,11 +497,6 @@
     }
   },
   {
-    "type": "variable_ref",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "\"",
     "named": false
   },
@@ -578,19 +573,15 @@
     "named": true
   },
   {
+    "type": "variable_ref",
+    "named": true
+  },
+  {
     "type": "{",
     "named": false
   },
   {
-    "type": "{{",
-    "named": false
-  },
-  {
     "type": "}",
-    "named": false
-  },
-  {
-    "type": "}}",
     "named": false
   }
 ]

@@ -853,21 +853,28 @@
       ]
     },
     "variable_ref": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "{{"
-        },
-        {
-          "type": "PATTERN",
-          "value": "[A-Za-z_\\.\\d]*"
-        },
-        {
-          "type": "STRING",
-          "value": "}}"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "{{"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[A-Za-z_\\.\\d]*"
+            },
+            {
+              "type": "STRING",
+              "value": "}}"
+            }
+          ]
         }
-      ]
+      }
     },
     "identifier": {
       "type": "SYMBOL",

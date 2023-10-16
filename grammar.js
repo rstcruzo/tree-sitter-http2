@@ -143,7 +143,7 @@ module.exports = grammar({
                 field("variable_value", $.rest_of_line),
                 $._new_line,
             ),
-        variable_ref: () => seq("{{", /[A-Za-z_\.\d]*/, "}}"),
+        variable_ref: () => token(prec(2, seq("{{", /[A-Za-z_\.\d]*/, "}}"))),
         identifier: ($) => $._identifier,
         request_delimiter: () => /###|---/,
         rest_of_line: () => /[^\n]+/,
