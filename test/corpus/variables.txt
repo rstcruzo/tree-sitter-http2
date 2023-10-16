@@ -9,3 +9,16 @@ GET http://{{}}/
   (request
    (method_url (method) (url (scheme) (variable_ref) (path)))))
 
+=====================
+Header with variable
+=====================
+GET http://localhost
+Content-Type: Bearer {{variable}}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain)))
+   (header (identifier) (rest_of_line_dynamic (variable_ref)))))
+

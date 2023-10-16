@@ -1,7 +1,7 @@
 module.exports = grammar({
     name: "http2",
 
-    extras: () => [/\s/],
+    extras: () => [/ /],
 
     rules: {
         source_file: ($) =>
@@ -13,7 +13,7 @@ module.exports = grammar({
                     $.method_url,
                     $._new_line,
                     repeat(seq($.header, $._new_line)),
-                    optional($._body),
+                    optional(seq($._body, $._new_line)),
                 ),
             ),
         method_url: ($) => seq($.method, $.url, optional($.http_version)),
@@ -33,10 +33,7 @@ module.exports = grammar({
                 ":",
                 field(
                     "header_value",
-                    choice(
-                        seq($._kill_leading_whitespace, $.rest_of_line),
-                        seq($._kill_leading_whitespace, $.variable_ref),
-                    ),
+                    seq($._kill_leading_whitespace, $.rest_of_line_dynamic),
                 ),
             ),
         method: ($) =>
@@ -72,9 +69,21 @@ module.exports = grammar({
                 "=",
                 field("parameter_value", choice($.identifier, $.variable_ref)),
             ),
-        _body: ($) => choice($.json_body, $.url_encoded_body),
+        _body: ($) => choice($.json_body, $.url_encoded_body, $.raw_body),
+        raw_body: () => token(prec(-1, /.+/)),
         json_body: ($) =>
-            choice(seq("{", optional($._key_value_list), "}"), $.json_list),
+            choice(
+                prec.left(
+                    seq(
+                        "{",
+                        optional($._new_line),
+                        optional($._key_value_list),
+                        "}",
+                        optional($._new_line),
+                    ),
+                ),
+                $.json_list,
+            ),
         _key_value_list: ($) =>
             seq(
                 $.json_key_value,
@@ -96,9 +105,28 @@ module.exports = grammar({
                     $.json_list,
                 ),
             ),
-        json_list: ($) => seq("[", optional($._json_list_values), "]"),
+        json_list: ($) =>
+            prec.left(
+                seq(
+                    "[",
+                    optional($._new_line),
+                    optional($._json_list_values),
+                    "]",
+                    optional($._new_line),
+                ),
+            ),
         _json_list_values: ($) =>
-            seq($._json_value, repeat(seq(",", $._json_value))),
+            seq(
+                $._json_value,
+                repeat(
+                    seq(
+                        ",",
+                        optional($._new_line),
+                        $._json_value,
+                        optional($._new_line),
+                    ),
+                ),
+            ),
         url_encoded_body: ($) =>
             seq(
                 $.url_encoded_key_value,
@@ -124,7 +152,9 @@ module.exports = grammar({
         variable_ref: () => token(prec(2, seq("{{", /[A-Za-z_\.\d]*/, "}}"))),
         identifier: ($) => $._identifier,
         _kill_leading_whitespace: () => /[\s]*/,
+        request_delimiter: () => /###|---/,
         rest_of_line: () => /[^\n]+/,
+        rest_of_line_dynamic: ($) => repeat1(choice(/[^\n]/, $.variable_ref)),
         domain: () => /[A-Za-z\-:\.\d]+/,
         number: () => /[0-9\.]+/,
         boolean: () => /(true|false)/,

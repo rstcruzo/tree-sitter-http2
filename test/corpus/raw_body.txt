@@ -1,0 +1,14 @@
+=====================
+Simple XML body
+=====================
+POST http://localhost/
+
+<value>a value</value>
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain) (path)))
+   (raw_body)))
+
