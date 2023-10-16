@@ -151,8 +151,7 @@ module.exports = grammar({
         domain: () => /[A-Za-z\-:\.\d]+/,
         number: () => /[0-9\.]+/,
         boolean: () => /(true|false)/,
-        string: ($) =>
-            choice(seq('"', $.variable_ref, '"'), seq('"', /[^"\n]*/, '"')),
+        string: ($) => seq('"', repeat1(choice(/[^"\n]/, $.variable_ref)), '"'),
         _new_line: () => token.immediate(/[\r\n]+/),
     },
 });

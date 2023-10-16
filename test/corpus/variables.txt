@@ -22,3 +22,43 @@ Content-Type: Bearer {{variable}}
    (method_url (method) (url (scheme) (domain)))
    (header (identifier) (rest_of_line_dynamic (variable_ref)))))
 
+=====================
+String as variable
+=====================
+GET http://localhost
+
+{
+  "key": "{{value}}"
+}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain)))
+   (json_body
+    (json_key_value
+     (identifier)
+     (string
+      (variable_ref))))))
+
+=====================
+String with variable
+=====================
+GET http://localhost
+
+{
+  "key": "the value: {{value}}"
+}
+
+---
+
+(source_file
+  (request
+   (method_url (method) (url (scheme) (domain)))
+   (json_body
+    (json_key_value
+     (identifier)
+     (string
+      (variable_ref))))))
+
