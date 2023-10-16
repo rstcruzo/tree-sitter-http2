@@ -1,8 +1,11 @@
 (method) @keyword
 (url) @text.uri
-(variable_declaration) @function.builtin
-(variable_ref) @function.builtin
+(variable_declaration) @attribute
+(variable_declaration variable_name: (identifier) @var (#lua-match? @var "request.title")) @text.title
+(variable_ref) @variable
 (header header_name: (identifier) @property)
+
+(http_version) @tag
 
 (json_key_value key: _* @property)
 (url_encoded_key_value key: (identifier) @property)
