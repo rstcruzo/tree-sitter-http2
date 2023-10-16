@@ -29,9 +29,9 @@ module.exports = grammar({
         reason_phrase: ($) => $.rest_of_line,
         header: ($) =>
             seq(
-                field("header_name", choice($.identifier, $.variable_ref)),
+                field("header_name", $.identifier),
                 ":",
-                field("header_value", $.rest_of_line_dynamic),
+                field("header_value", $.rest_of_line),
             ),
         method: ($) =>
             choice(
@@ -49,11 +49,11 @@ module.exports = grammar({
             ),
         scheme: (_) =>
             /(about|acct|arcp|cap|cid|coap+tcp|coap+ws|coaps+tcp|coaps+ws|data|dns|example|file|ftp|geo|h323|http|https|im|info|ipp|mailto|mid|ni|nih|payto|pkcs11|pres|reload|secret-token|session|sms|tag|telnet|urn|ws|wss)/,
-        _identifier: (_) => /[A-Za-z_\.\d-]+/,
+        _identifier: ($) => repeat1(choice(/[A-Za-z_\.\d-]/, $.variable_ref)),
         path: ($) =>
             choice(
                 seq(
-                    repeat1(seq("/", choice($._identifier, $.variable_ref))),
+                    repeat1(seq("/", $._identifier)),
                     optional("/"), // Trailing slash
                 ),
                 "/", // Path is only the trailing slash
@@ -62,9 +62,9 @@ module.exports = grammar({
             seq($.query_param, repeat(seq("&", $.query_param))),
         query_param: ($) =>
             seq(
-                field("parameter_name", choice($.identifier, $.variable_ref)),
+                field("parameter_name", $.identifier),
                 "=",
-                field("parameter_value", choice($.identifier, $.variable_ref)),
+                field("parameter_value", $.identifier),
             ),
         _body: ($) => choice($.json_body, $.url_encoded_body, $.raw_body),
         raw_body: () => token(prec(-1, /.+/)),
@@ -89,7 +89,7 @@ module.exports = grammar({
             ),
         json_key_value: ($) =>
             seq(field("key", $._json_key), ":", field("value", $._json_value)),
-        _json_key: ($) => seq('"', choice($.identifier, $.variable_ref), '"'),
+        _json_key: ($) => seq('"', $.identifier, '"'),
         _json_value: ($) =>
             prec(
                 2,
@@ -130,11 +130,7 @@ module.exports = grammar({
                 repeat(seq("&", $.url_encoded_key_value)),
             ),
         url_encoded_key_value: ($) =>
-            seq(
-                field("key", choice($.identifier, $.variable_ref)),
-                "=",
-                field("value", choice($.identifier, $.variable_ref)),
-            ),
+            seq(field("key", $.identifier), "=", field("value", $.identifier)),
         variable_declaration: ($) =>
             seq(
                 "@",
@@ -146,8 +142,7 @@ module.exports = grammar({
         variable_ref: () => token(prec(2, seq("{{", /[A-Za-z_\.\d]*/, "}}"))),
         identifier: ($) => $._identifier,
         request_delimiter: () => /###|---/,
-        rest_of_line: () => /[^\n]+/,
-        rest_of_line_dynamic: ($) => repeat1(choice(/[^\n]/, $.variable_ref)),
+        rest_of_line: ($) => repeat1(choice(/[^\n]/, $.variable_ref)),
         domain: () => /[A-Za-z\-:\.\d]+/,
         number: () => /[0-9\.]+/,
         boolean: () => /(true|false)/,

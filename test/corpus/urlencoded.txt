@@ -30,6 +30,6 @@ username={{user}}&password=pwd
    (method_url (method) (url (scheme) (domain) (path)))
    (url_encoded_body
     (url_encoded_key_value
-     (identifier) (variable_ref))
+     (identifier) (identifier (variable_ref)))
     (url_encoded_key_value
      (identifier) (identifier)))))

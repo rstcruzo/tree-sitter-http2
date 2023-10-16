@@ -20,7 +20,7 @@ Content-Type: Bearer {{variable}}
 (source_file
   (request
    (method_url (method) (url (scheme) (domain)))
-   (header (identifier) (rest_of_line_dynamic (variable_ref)))))
+   (header (identifier) (rest_of_line (variable_ref)))))
 
 =====================
 String as variable

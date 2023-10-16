@@ -10,10 +10,6 @@
           {
             "type": "identifier",
             "named": true
-          },
-          {
-            "type": "variable_ref",
-            "named": true
           }
         ]
       },
@@ -22,7 +18,7 @@
         "required": true,
         "types": [
           {
-            "type": "rest_of_line_dynamic",
+            "type": "rest_of_line",
             "named": true
           }
         ]
@@ -37,7 +33,17 @@
   {
     "type": "identifier",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "variable_ref",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "json_body",
@@ -72,10 +78,6 @@
           },
           {
             "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "variable_ref",
             "named": true
           }
         ]
@@ -211,10 +213,6 @@
           {
             "type": "identifier",
             "named": true
-          },
-          {
-            "type": "variable_ref",
-            "named": true
           }
         ]
       },
@@ -224,10 +222,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "variable_ref",
             "named": true
           }
         ]
@@ -315,7 +309,7 @@
     }
   },
   {
-    "type": "rest_of_line_dynamic",
+    "type": "rest_of_line",
     "named": true,
     "fields": {},
     "children": {
@@ -447,10 +441,6 @@
           {
             "type": "identifier",
             "named": true
-          },
-          {
-            "type": "variable_ref",
-            "named": true
           }
         ]
       },
@@ -460,10 +450,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "variable_ref",
             "named": true
           }
         ]
@@ -558,10 +544,6 @@
   },
   {
     "type": "raw_body",
-    "named": true
-  },
-  {
-    "type": "rest_of_line",
     "named": true
   },
   {
