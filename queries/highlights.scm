@@ -2,7 +2,7 @@
 (url) @text.uri
 (variable_declaration) @attribute
 (variable_declaration variable_name: (identifier) @var (#lua-match? @var "request.title")) @text.title
-(variable_ref) @variable
+(variable_ref) @attribute
 (header header_name: (identifier) @property)
 
 (http_version) @tag
