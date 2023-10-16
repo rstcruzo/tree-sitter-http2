@@ -49,7 +49,6 @@ module.exports = grammar({
             ),
         scheme: (_) =>
             /(about|acct|arcp|cap|cid|coap+tcp|coap+ws|coaps+tcp|coaps+ws|data|dns|example|file|ftp|geo|h323|http|https|im|info|ipp|mailto|mid|ni|nih|payto|pkcs11|pres|reload|secret-token|session|sms|tag|telnet|urn|ws|wss)/,
-        _identifier: ($) => repeat1(choice(/[A-Za-z_\.\d-]/, $.variable_ref)),
         path: ($) =>
             choice(
                 seq(
@@ -147,6 +146,7 @@ module.exports = grammar({
         number: () => /[0-9\.]+/,
         boolean: () => /(true|false)/,
         string: ($) => seq('"', repeat1(choice(/[^"\n]/, $.variable_ref)), '"'),
+        _identifier: ($) => repeat1(choice(/[A-Za-z_\.\d\-]/, $.variable_ref)),
         _new_line: () => token.immediate(/[\r\n]+/),
     },
 });
