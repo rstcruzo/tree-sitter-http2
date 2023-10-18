@@ -145,7 +145,7 @@ module.exports = grammar({
         domain: () => /[A-Za-z\-:\.\d]+/,
         number: () => /[0-9\.]+/,
         boolean: () => /(true|false)/,
-        string: ($) => seq('"', repeat1(choice(/[^"\n]/, $.variable_ref)), '"'),
+        string: ($) => seq('"', repeat(choice(/[^"\n]/, $.variable_ref)), '"'),
         _identifier: ($) => repeat1(choice(/[A-Za-z_\.\d\-]/, $.variable_ref)),
         _new_line: () => token.immediate(/[\r\n]+/),
     },
