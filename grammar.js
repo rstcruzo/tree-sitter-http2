@@ -62,8 +62,9 @@ module.exports = grammar({
         query_param: ($) =>
             seq(
                 field("parameter_name", $.identifier),
-                "=",
-                field("parameter_value", $.identifier),
+                optional(
+                    seq("=", optional(field("parameter_value", $.identifier))),
+                ),
             ),
         _body: ($) => choice($.json_body, $.url_encoded_body, $.raw_body),
         raw_body: () => token(prec(-1, /.+/)),
@@ -140,13 +141,13 @@ module.exports = grammar({
             ),
         variable_ref: () => token(prec(2, seq("{{", /[A-Za-z_\.\d]*/, "}}"))),
         identifier: ($) => $._identifier,
+        _identifier: ($) => repeat1(choice(/[A-Za-z_\.\d\-]/, $.variable_ref)),
         request_delimiter: () => /###|---/,
         rest_of_line: ($) => repeat1(choice(/[^\n]/, $.variable_ref)),
         domain: () => /[A-Za-z\-:\.\d]+/,
         number: () => /[0-9\.]+/,
         boolean: () => /(true|false)/,
         string: ($) => seq('"', repeat(choice(/[^"\n]/, $.variable_ref)), '"'),
-        _identifier: ($) => repeat1(choice(/[A-Za-z_\.\d\-]/, $.variable_ref)),
         _new_line: () => token.immediate(/[\r\n]+/),
     },
 });

@@ -373,16 +373,37 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "FIELD",
-          "name": "parameter_value",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "="
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "parameter_value",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -813,6 +834,22 @@
       "type": "SYMBOL",
       "name": "_identifier"
     },
+    "_identifier": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[A-Za-z_\\.\\d\\-]"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "variable_ref"
+          }
+        ]
+      }
+    },
     "request_delimiter": {
       "type": "PATTERN",
       "value": "###|---"
@@ -873,22 +910,6 @@
           "value": "\""
         }
       ]
-    },
-    "_identifier": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[A-Za-z_\\.\\d\\-]"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "variable_ref"
-          }
-        ]
-      }
     },
     "_new_line": {
       "type": "IMMEDIATE_TOKEN",

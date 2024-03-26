@@ -121,3 +121,41 @@ Content-Type: application/json
      (domain)
       (path)))
    (header (identifier) (rest_of_line))))
+
+=====================
+GET method query parameter without value
+=====================
+GET http://localhost/params?query=
+Content-Type: application/json
+
+---
+
+(source_file
+  (request
+   (method_url
+    (method)
+    (url
+     (scheme)
+     (domain)
+      (path)
+      (query_params (query_param parameter_name: (identifier)))))
+   (header header_name: (identifier) header_value: (rest_of_line))))
+
+=====================
+GET method query parameter without value and without equals sign
+=====================
+GET http://localhost/params?query=
+Content-Type: application/json
+
+---
+
+(source_file
+  (request
+   (method_url
+    (method)
+    (url
+     (scheme)
+     (domain)
+      (path)
+      (query_params (query_param parameter_name: (identifier)))))
+   (header header_name: (identifier) header_value: (rest_of_line))))
