@@ -68,19 +68,7 @@ module.exports = grammar({
             ),
         _body: ($) => choice($.json_body, $.url_encoded_body, $.raw_body),
         raw_body: () => token(prec(-1, /.+/)),
-        json_body: ($) =>
-            choice(
-                prec.left(
-                    seq(
-                        "{",
-                        optional($._new_line),
-                        optional($._key_value_list),
-                        "}",
-                        optional($._new_line),
-                    ),
-                ),
-                $.json_list,
-            ),
+        json_body: ($) => choice($.json_object, $.json_list),
         _key_value_list: ($) =>
             seq(
                 $.json_key_value,
@@ -100,6 +88,16 @@ module.exports = grammar({
                     $.json_body,
                     $.variable_ref,
                     $.json_list,
+                ),
+            ),
+        json_object: ($) =>
+            prec.left(
+                seq(
+                    "{",
+                    optional($._new_line),
+                    optional($._key_value_list),
+                    "}",
+                    optional($._new_line),
                 ),
             ),
         json_list: ($) =>

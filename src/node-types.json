@@ -50,15 +50,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "json_key_value",
+          "type": "json_list",
           "named": true
         },
         {
-          "type": "json_list",
+          "type": "json_object",
           "named": true
         }
       ]
@@ -144,6 +144,21 @@
         },
         {
           "type": "variable_ref",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "json_object",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "json_key_value",
           "named": true
         }
       ]

@@ -13,8 +13,9 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-    (json_key_value
-     (identifier) (string)))))
+    (json_object
+     (json_key_value
+      (identifier) (string))))))
 
 =====================
 Empty JSON body
@@ -184,13 +185,16 @@ POST http://localhost/
   (request
    (method_url (method) (url (scheme) (domain) (path)))
    (json_body
-    (json_key_value
-     (identifier)
-       (json_list
-          (json_body
-           (json_key_value
-            (identifier) (string)))
-          (json_body
-           (json_key_value
-            (identifier) (string))))))))
+    (json_object
+     (json_key_value
+      (identifier)
+      (json_list
+       (json_body
+        (json_object
+         (json_key_value
+          (identifier) (string))))
+       (json_body
+        (json_object
+         (json_key_value
+          (identifier) (string))))))))))
 
