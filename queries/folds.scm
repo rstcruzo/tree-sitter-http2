@@ -1,4 +1,4 @@
 [
   (json_object)
-  (json_array)
+  (json_list)
 ] @fold
