@@ -1,4 +1,15 @@
 =====================
+Simple implicit GET method with trailing slash
+=====================
+http://localhost/
+
+---
+
+(source_file
+  (request
+   (method_url (url (scheme) (domain) (path)))))
+
+=====================
 Simple GET method with trailing slash
 =====================
 GET http://localhost/
