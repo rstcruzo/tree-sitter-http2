@@ -36,12 +36,13 @@ GET http://localhost
 (source_file
   (request
    (method_url (method) (url (scheme) (domain)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier)
-      (string
-       (variable_ref)))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier)
+       (string
+        (variable_ref))))))))
 
 =====================
 String with variable
@@ -57,10 +58,11 @@ GET http://localhost
 (source_file
   (request
    (method_url (method) (url (scheme) (domain)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier)
-      (string
-       (variable_ref)))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier)
+       (string
+        (variable_ref))))))))
 

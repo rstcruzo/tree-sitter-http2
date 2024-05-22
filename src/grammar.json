@@ -59,7 +59,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "_body"
+                    "name": "body"
                   },
                   {
                     "type": "SYMBOL",
@@ -415,7 +415,7 @@
         }
       ]
     },
-    "_body": {
+    "body": {
       "type": "CHOICE",
       "members": [
         {

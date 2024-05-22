@@ -12,10 +12,11 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier) (string))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier) (string)))))))
 
 =====================
 Empty JSON body
@@ -30,7 +31,8 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body (json_object))))
+   (body
+    (json_body (json_object)))))
 
 =====================
 List JSON body
@@ -46,9 +48,10 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body
+   (body
+    (json_body
      (json_list
-      (string) (string)))))
+      (string) (string))))))
 
 =====================
 Larger JSON body
@@ -66,14 +69,15 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier) (string))
-     (json_key_value
-      (identifier) (string))
-     (json_key_value
-      (identifier) (string))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier) (string))
+      (json_key_value
+       (identifier) (string))
+      (json_key_value
+       (identifier) (string)))))))
 
 =====================
 One line JSON body
@@ -87,10 +91,11 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier) (string))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier) (string)))))))
 
 =====================
 One line JSON body with random spaces.
@@ -104,10 +109,11 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier) (string))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier) (string)))))))
 
 =====================
 Nested JSON
@@ -125,15 +131,16 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier)
-      (json_body
-       (json_object
-        (json_key_value
-         (identifier)
-         (string)))))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier)
+       (json_body
+        (json_object
+         (json_key_value
+          (identifier)
+          (string))))))))))
 
 =====================
 JSON body with a json_list
@@ -149,10 +156,11 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier) (json_list (string) (string)))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier) (json_list (string) (string))))))))
 
 =====================
 JSON body with an empty json_list
@@ -168,10 +176,11 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier) (json_list))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier) (json_list)))))))
 
 =====================
 JSON body with a json_list of objects
@@ -191,17 +200,18 @@ POST http://localhost/
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (json_body
-    (json_object
-     (json_key_value
-      (identifier)
-      (json_list
-       (json_body
-        (json_object
-         (json_key_value
-          (identifier) (string))))
-       (json_body
-        (json_object
-         (json_key_value
-          (identifier) (string))))))))))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier)
+       (json_list
+        (json_body
+         (json_object
+          (json_key_value
+           (identifier) (string))))
+        (json_body
+         (json_object
+          (json_key_value
+           (identifier) (string)))))))))))
 

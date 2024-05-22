@@ -10,11 +10,12 @@ username=user&password=pwd
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (url_encoded_body
-    (url_encoded_key_value
-     (identifier) (identifier))
-    (url_encoded_key_value
-     (identifier) (identifier)))))
+   (body
+    (url_encoded_body
+     (url_encoded_key_value
+      (identifier) (identifier))
+     (url_encoded_key_value
+      (identifier) (identifier))))))
 
 =====================
 URL encoded body with variables
@@ -28,8 +29,9 @@ username={{user}}&password=pwd
 (source_file
   (request
    (method_url (method) (url (scheme) (domain) (path)))
-   (url_encoded_body
-    (url_encoded_key_value
-     (identifier) (identifier (variable_ref)))
-    (url_encoded_key_value
-     (identifier) (identifier)))))
+   (body
+    (url_encoded_body
+     (url_encoded_key_value
+      (identifier) (identifier (variable_ref)))
+     (url_encoded_key_value
+      (identifier) (identifier))))))

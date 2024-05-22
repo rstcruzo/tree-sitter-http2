@@ -1,5 +1,28 @@
 [
   {
+    "type": "body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "json_body",
+          "named": true
+        },
+        {
+          "type": "raw_body",
+          "named": true
+        },
+        {
+          "type": "url_encoded_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "header",
     "named": true,
     "fields": {
@@ -282,23 +305,15 @@
       "required": true,
       "types": [
         {
+          "type": "body",
+          "named": true
+        },
+        {
           "type": "header",
           "named": true
         },
         {
-          "type": "json_body",
-          "named": true
-        },
-        {
           "type": "method_url",
-          "named": true
-        },
-        {
-          "type": "raw_body",
-          "named": true
-        },
-        {
-          "type": "url_encoded_body",
           "named": true
         }
       ]

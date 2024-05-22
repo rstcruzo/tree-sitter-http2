@@ -13,7 +13,7 @@ module.exports = grammar({
                     $.method_url,
                     $._new_line,
                     repeat(seq($.header, $._new_line)),
-                    optional(seq($._body, $._new_line)),
+                    optional(seq($.body, $._new_line)),
                 ),
             ),
         method_url: ($) =>
@@ -67,7 +67,7 @@ module.exports = grammar({
                     seq("=", optional(field("parameter_value", $.identifier))),
                 ),
             ),
-        _body: ($) => choice($.json_body, $.url_encoded_body, $.raw_body),
+        body: ($) => choice($.json_body, $.url_encoded_body, $.raw_body),
         raw_body: () => token(prec(-1, /.+/)),
         json_body: ($) => choice($.json_object, $.json_list),
         _key_value_list: ($) =>
