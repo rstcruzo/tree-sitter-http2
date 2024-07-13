@@ -7,11 +7,12 @@ POST http://localhost/
   "json_key": "json_value"
 }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object
@@ -26,11 +27,12 @@ POST http://localhost/
 {
 }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body (json_object)))))
 
@@ -43,11 +45,12 @@ POST http://localhost/
   "json_key", "key2"
 ]
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_list
@@ -64,11 +67,12 @@ POST http://localhost/
   "json_key": "json_value"
 }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object
@@ -86,11 +90,12 @@ POST http://localhost/
 
 {"json_key": "json_value"}
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object
@@ -104,11 +109,12 @@ POST http://localhost/
 
 {  "json_key"   : "json_value" }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object
@@ -126,11 +132,12 @@ POST http://localhost/
   }
 }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object
@@ -151,11 +158,12 @@ POST http://localhost/
   "json_key": ["first", "second"]
 }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object
@@ -171,11 +179,12 @@ POST http://localhost/
   "json_key": []
 }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object
@@ -195,11 +204,12 @@ POST http://localhost/
   }]
 }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object

@@ -5,17 +5,18 @@ POST http://localhost/
 
 username=user&password=pwd
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (url_encoded_body
      (url_encoded_key_value
-      (identifier) (identifier))
+      (url_encoded_key) (identifier))
      (url_encoded_key_value
-      (identifier) (identifier))))))
+      (url_encoded_key) (identifier))))))
 
 =====================
 URL encoded body with variables
@@ -24,14 +25,15 @@ POST http://localhost/
 
 username={{user}}&password=pwd
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain) (path)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (url_encoded_body
      (url_encoded_key_value
-      (identifier) (identifier (variable_ref)))
+      (url_encoded_key) (identifier (variable_ref)))
      (url_encoded_key_value
-      (identifier) (identifier))))))
+      (url_encoded_key) (identifier))))))

@@ -1,14 +1,50 @@
 =====================
-SimpleaXML body
+Simple XML body
 =====================
-POST http://localhost/
+POST http://localhost
 
-<value>a value</value>
+<something>this is something</something>
+
 
 ---
 
 (source_file
-  (request
-   (method_url (method) (url (scheme) (domain) (path)))
-   (body (raw_body))))
+ (request
+  (start_line (method) (url (rest_of_line)))
+  (body (raw_body))))
+
+=====================
+Multiline XML body
+=====================
+POST http://localhost/
+
+<value>
+    a value
+</value>
+
+
+---
+
+(source_file
+ (request
+  (start_line (method) (url (rest_of_line)))
+  (body (raw_body))))
+
+
+=====================
+Multiline XML body with variables (no parsing of variable references in raw_body)
+=====================
+POST http://localhost/
+
+<value>
+    {{variable}}
+</value>
+
+
+---
+
+(source_file
+ (request
+  (start_line (method) (url (rest_of_line)))
+  (body (raw_body))))
 

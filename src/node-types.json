@@ -26,17 +26,17 @@
     "type": "header",
     "named": true,
     "fields": {
-      "header_name": {
+      "name": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "header_name",
             "named": true
           }
         ]
       },
-      "header_value": {
+      "value": {
         "multiple": false,
         "required": true,
         "types": [
@@ -188,100 +188,6 @@
     }
   },
   {
-    "type": "method",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "variable_ref",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "method_url",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "http_version",
-          "named": true
-        },
-        {
-          "type": "method",
-          "named": true
-        },
-        {
-          "type": "url",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "path",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "variable_ref",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "query_param",
-    "named": true,
-    "fields": {
-      "parameter_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "parameter_value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "query_params",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "query_param",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "reason_phrase",
     "named": true,
     "fields": {},
@@ -313,7 +219,7 @@
           "named": true
         },
         {
-          "type": "method_url",
+          "type": "start_line",
           "named": true
         }
       ]
@@ -328,11 +234,38 @@
       "required": true,
       "types": [
         {
+          "type": "body",
+          "named": true
+        },
+        {
           "type": "header",
           "named": true
         },
         {
-          "type": "status_line",
+          "type": "response_start_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "response_start_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "http_version",
+          "named": true
+        },
+        {
+          "type": "reason_phrase",
+          "named": true
+        },
+        {
+          "type": "status_code",
           "named": true
         }
       ]
@@ -359,7 +292,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "request",
@@ -370,6 +303,10 @@
           "named": true
         },
         {
+          "type": "separator",
+          "named": true
+        },
+        {
           "type": "variable_declaration",
           "named": true
         }
@@ -377,7 +314,7 @@
     }
   },
   {
-    "type": "status_line",
+    "type": "start_line",
     "named": true,
     "fields": {},
     "children": {
@@ -385,15 +322,11 @@
       "required": true,
       "types": [
         {
-          "type": "http_version",
+          "type": "method",
           "named": true
         },
         {
-          "type": "reason_phrase",
-          "named": true
-        },
-        {
-          "type": "status_code",
+          "type": "url",
           "named": true
         }
       ]
@@ -419,27 +352,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "domain",
-          "named": true
-        },
-        {
-          "type": "path",
-          "named": true
-        },
-        {
-          "type": "query_params",
-          "named": true
-        },
-        {
-          "type": "scheme",
-          "named": true
-        },
-        {
-          "type": "variable_ref",
+          "type": "rest_of_line",
           "named": true
         }
       ]
@@ -461,6 +378,11 @@
     }
   },
   {
+    "type": "url_encoded_key",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "url_encoded_key_value",
     "named": true,
     "fields": {
@@ -469,7 +391,7 @@
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "url_encoded_key",
             "named": true
           }
         ]
@@ -490,7 +412,7 @@
     "type": "variable_declaration",
     "named": true,
     "fields": {
-      "variable_name": {
+      "name": {
         "multiple": false,
         "required": true,
         "types": [
@@ -500,7 +422,7 @@
           }
         ]
       },
-      "variable_value": {
+      "value": {
         "multiple": false,
         "required": true,
         "types": [
@@ -525,23 +447,11 @@
     "named": false
   },
   {
-    "type": "/",
-    "named": false
-  },
-  {
     "type": ":",
     "named": false
   },
   {
-    "type": "://",
-    "named": false
-  },
-  {
     "type": "=",
-    "named": false
-  },
-  {
-    "type": "?",
     "named": false
   },
   {
@@ -565,7 +475,11 @@
     "named": true
   },
   {
-    "type": "domain",
+    "type": "header_name",
+    "named": true
+  },
+  {
+    "type": "method",
     "named": true
   },
   {
@@ -577,7 +491,7 @@
     "named": true
   },
   {
-    "type": "scheme",
+    "type": "separator",
     "named": true
   },
   {

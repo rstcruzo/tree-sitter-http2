@@ -3,11 +3,25 @@ Empty variable name (useful for completion)
 =====================
 GET http://{{}}/
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (variable_ref) (path)))))
+   (start_line (method) (url (rest_of_line (variable_ref))))))
+
+
+=====================
+Base url as variable
+=====================
+GET {{base_url}}/path/here
+
+
+---
+
+(source_file
+  (request
+   (start_line (method) (url (rest_of_line (variable_ref))))))
 
 =====================
 Header with variable
@@ -15,12 +29,13 @@ Header with variable
 GET http://localhost
 Content-Type: Bearer {{variable}}
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain)))
-   (header (identifier) (rest_of_line (variable_ref)))))
+   (start_line (method) (url (rest_of_line)))
+   (header (header_name) (rest_of_line (variable_ref)))))
 
 =====================
 String as variable
@@ -31,11 +46,12 @@ GET http://localhost
   "key": "{{value}}"
 }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object
@@ -53,11 +69,12 @@ GET http://localhost
   "key": "the value: {{value}}"
 }
 
+
 ---
 
 (source_file
   (request
-   (method_url (method) (url (scheme) (domain)))
+   (start_line (method) (url (rest_of_line)))
    (body
     (json_body
      (json_object
