@@ -100,3 +100,23 @@ POST {{api_url}}/o/token/
   (request
    (start_line (method) (url (rest_of_line (variable_ref))))))
 
+
+=====================
+Variables and spaces before request
+=====================
+@request.title = Login with username and password
+
+@request.after_hook = save_access_token
+
+
+POST {{api_url}}/o/token/
+
+
+---
+
+(source_file
+  (variable_declaration (identifier) (rest_of_line))
+  (variable_declaration (identifier) (rest_of_line))
+  (request
+   (start_line (method) (url (rest_of_line (variable_ref))))))
+

@@ -18,12 +18,11 @@
                 "name": "separator"
               },
               {
-                "type": "SYMBOL",
-                "name": "_nl"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_nl"
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_nl"
+                }
               },
               {
                 "type": "SYMBOL",
@@ -52,8 +51,17 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "variable_declaration"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "variable_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_nl"
+              }
+            ]
           }
         },
         {
@@ -72,8 +80,17 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "variable_declaration"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "variable_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_nl"
+              }
+            ]
           }
         }
       ]
@@ -120,12 +137,11 @@
                   "name": "body"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "_nl"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_nl"
+                  "type": "REPEAT1",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_nl"
+                  }
                 }
               ]
             },
@@ -883,7 +899,14 @@
       "value": " "
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "_block"
+    ],
+    [
+      "request"
+    ]
+  ],
   "precedences": [],
   "externals": [],
   "inline": [],

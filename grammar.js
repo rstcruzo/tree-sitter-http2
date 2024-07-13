@@ -2,19 +2,20 @@ module.exports = grammar({
     name: "http2",
 
     extras: () => [/ /],
+    conflicts: ($) => [[$._block], [$.request]],
 
     rules: {
         source_file: ($) =>
             seq(
                 $._block,
-                repeat(seq($.separator, $._nl, $._nl, $._block)),
+                repeat(seq($.separator, repeat1($._nl), $._block)),
                 optional($.separator),
             ),
         _block: ($) =>
             seq(
-                repeat($.variable_declaration),
+                repeat(choice($.variable_declaration, $._nl)),
                 choice($.request, $.response),
-                repeat($.variable_declaration),
+                repeat(choice($.variable_declaration, $._nl)),
             ),
         request: ($) =>
             seq(
@@ -22,7 +23,7 @@ module.exports = grammar({
                 $._nl,
                 repeat(seq($.header, $._nl)),
                 $._nl,
-                optional(seq($.body, $._nl, $._nl)),
+                optional(seq($.body, repeat1($._nl))),
             ),
         response: ($) =>
             seq(
