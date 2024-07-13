@@ -118,7 +118,7 @@ module.exports = grammar({
                     seq(",", optional($._nl), $._json_value, optional($._nl)),
                 ),
             ),
-        separator: () => "###",
+        separator: () => token(prec(2, "###")),
         response_start_line: ($) =>
             seq($.http_version, $.status_code, $.reason_phrase),
         http_version: () => seq("HTTP/", /[\d\.]+/),

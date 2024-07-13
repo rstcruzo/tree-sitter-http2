@@ -1,0 +1,19 @@
+=====================
+Multiple requests
+=====================
+POST http://localhost/
+
+###
+
+GET http://localhost/
+
+
+---
+
+(source_file
+  (request
+   (start_line (method) (url (rest_of_line))))
+  (separator)
+  (request
+   (start_line (method) (url (rest_of_line)))))
+
