@@ -493,6 +493,10 @@
         "members": [
           {
             "type": "SYMBOL",
+            "name": "null"
+          },
+          {
+            "type": "SYMBOL",
             "name": "string"
           },
           {
@@ -820,6 +824,10 @@
           "value": "\""
         }
       ]
+    },
+    "null": {
+      "type": "STRING",
+      "value": "null"
     },
     "variable_ref": {
       "type": "TOKEN",

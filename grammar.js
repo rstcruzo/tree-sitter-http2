@@ -83,6 +83,7 @@ module.exports = grammar({
             prec(
                 2,
                 choice(
+                    $.null,
                     $.string,
                     $.number,
                     $.boolean,
@@ -130,6 +131,7 @@ module.exports = grammar({
         number: () => /[0-9\.]+/,
         boolean: () => /(true|false)/,
         string: ($) => seq('"', repeat(choice(/[^"\n]/, $.variable_ref)), '"'),
+        null: ($) => "null",
         variable_ref: () => token(prec(2, seq("{{", /[A-Za-z_\.\d]*/, "}}"))),
         rest_of_line: ($) => repeat1(choice(/[^\r\n]/, $.variable_ref)),
         _nl: () => token.immediate(/[\r\n]/),

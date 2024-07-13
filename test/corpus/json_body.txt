@@ -4,7 +4,8 @@ Simple JSON body
 POST http://localhost/
 
 {
-  "json_key": "json_value"
+  "json_key": "json_value",
+  "json_other_key": null
 }
 
 
@@ -17,7 +18,9 @@ POST http://localhost/
     (json_body
      (json_object
       (json_key_value
-       (identifier) (string)))))))
+       (identifier) (string))
+      (json_key_value
+       (identifier) (null)))))))
 
 =====================
 Empty JSON body

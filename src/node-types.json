@@ -122,6 +122,10 @@
             "named": true
           },
           {
+            "type": "null",
+            "named": true
+          },
+          {
             "type": "number",
             "named": true
           },
@@ -155,6 +159,10 @@
         },
         {
           "type": "json_list",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -480,6 +488,10 @@
   },
   {
     "type": "method",
+    "named": true
+  },
+  {
+    "type": "null",
     "named": true
   },
   {

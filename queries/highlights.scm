@@ -12,6 +12,7 @@
 (string) @string
 (number) @number
 (boolean) @boolean
+(null) @constant.builtin
 
 (status_code) @property
 (reason_phrase) @keyword
