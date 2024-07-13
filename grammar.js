@@ -6,16 +6,15 @@ module.exports = grammar({
     rules: {
         source_file: ($) =>
             seq(
-                choice($.request, $.response, $.variable_declaration),
-                repeat(
-                    seq(
-                        $.separator,
-                        $._nl,
-                        $._nl,
-                        choice($.request, $.response, $.variable_declaration),
-                    ),
-                ),
+                $._block,
+                repeat(seq($.separator, $._nl, $._nl, $._block)),
                 optional($.separator),
+            ),
+        _block: ($) =>
+            seq(
+                repeat($.variable_declaration),
+                choice($.request, $.response),
+                repeat($.variable_declaration),
             ),
         request: ($) =>
             seq(

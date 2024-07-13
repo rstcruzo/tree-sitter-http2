@@ -5,21 +5,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "request"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "response"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "variable_declaration"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_block"
         },
         {
           "type": "REPEAT",
@@ -39,21 +26,8 @@
                 "name": "_nl"
               },
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "request"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "response"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "variable_declaration"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_block"
               }
             ]
           }
@@ -69,6 +43,38 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable_declaration"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "request"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "response"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable_declaration"
+          }
         }
       ]
     },
