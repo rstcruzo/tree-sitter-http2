@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "http2",
   "rules": {
     "source_file": {
@@ -525,11 +526,11 @@
           },
           {
             "type": "SYMBOL",
-            "name": "json_body"
+            "name": "variable_ref"
           },
           {
             "type": "SYMBOL",
-            "name": "variable_ref"
+            "name": "json_object"
           },
           {
             "type": "SYMBOL",
@@ -854,8 +855,15 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "STRING",
-              "value": "{{"
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 10,
+                "content": {
+                  "type": "STRING",
+                  "value": "{{"
+                }
+              }
             },
             {
               "type": "PATTERN",

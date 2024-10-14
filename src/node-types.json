@@ -114,11 +114,11 @@
             "named": true
           },
           {
-            "type": "json_body",
+            "type": "json_list",
             "named": true
           },
           {
-            "type": "json_list",
+            "type": "json_object",
             "named": true
           },
           {
@@ -154,11 +154,11 @@
           "named": true
         },
         {
-          "type": "json_body",
+          "type": "json_list",
           "named": true
         },
         {
-          "type": "json_list",
+          "type": "json_object",
           "named": true
         },
         {
@@ -297,6 +297,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,

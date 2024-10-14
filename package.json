@@ -25,17 +25,6 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "tree-sitter": [
-    {
-      "scope": "source.http",
-      "file-types": [
-        "http"
-      ]
-    }
-  ],
-  "devDependencies": {
-    "prebuildify": "^6.0.0"
-  },
   "files": [
     "grammar.js",
     "binding.gyp",
@@ -43,5 +32,8 @@
     "bindings/node/*",
     "queries/*",
     "src/**"
-  ]
+  ],
+  "devDependencies": {
+    "prebuildify": "^6.0.0"
+  }
 }
