@@ -410,11 +410,26 @@
         "required": true,
         "types": [
           {
-            "type": "identifier",
+            "type": "url_encoded_value",
             "named": true
           }
         ]
       }
+    }
+  },
+  {
+    "type": "url_encoded_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "variable_ref",
+          "named": true
+        }
+      ]
     }
   },
   {

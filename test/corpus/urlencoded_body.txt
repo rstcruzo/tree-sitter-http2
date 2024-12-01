@@ -14,9 +14,9 @@ username=user&password=pwd
    (body
     (url_encoded_body
      (url_encoded_key_value
-      (url_encoded_key) (identifier))
+      (url_encoded_key) (url_encoded_value))
      (url_encoded_key_value
-      (url_encoded_key) (identifier))))))
+      (url_encoded_key) (url_encoded_value))))))
 
 =====================
 URL encoded body with variables
@@ -34,6 +34,6 @@ username={{user}}&password=pwd
    (body
     (url_encoded_body
      (url_encoded_key_value
-      (url_encoded_key) (identifier (variable_ref)))
+      (url_encoded_key) (url_encoded_value (variable_ref)))
      (url_encoded_key_value
-      (url_encoded_key) (identifier))))))
+      (url_encoded_key) (url_encoded_value))))))

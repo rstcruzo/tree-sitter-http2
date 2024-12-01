@@ -6,11 +6,7 @@ module.exports = grammar({
 
     rules: {
         source_file: ($) =>
-            seq(
-                $._block,
-                repeat(seq($.separator, repeat1($._nl), $._block)),
-                optional($.separator),
-            ),
+            seq($._block, repeat(seq($.separator, $._block)), repeat($._nl)),
         _block: ($) =>
             seq(
                 repeat(choice($.variable_declaration, $._nl)),
@@ -19,11 +15,9 @@ module.exports = grammar({
             ),
         request: ($) =>
             seq(
-                $.start_line,
-                $._nl,
+                seq($.start_line, $._nl),
                 repeat(seq($.header, $._nl)),
-                $._nl,
-                optional(seq($.body, repeat1($._nl))),
+                optional(seq($._nl, $.body, $._nl)),
             ),
         response: ($) =>
             seq(
@@ -45,7 +39,7 @@ module.exports = grammar({
             ),
         header_name: () => /[^\r\n:]+/,
         body: ($) => choice($.json_body, $.url_encoded_body, $.raw_body),
-        raw_body: ($) => /([\r\n]|.)+./,
+        raw_body: () => /[^#]{3}([\r\n]|.)+./,
         url_encoded_body: ($) =>
             seq(
                 $.url_encoded_key_value,
@@ -55,9 +49,10 @@ module.exports = grammar({
             seq(
                 field("key", $.url_encoded_key),
                 token(prec(5, "=")),
-                field("value", $.identifier),
+                field("value", $.url_encoded_value),
             ),
         url_encoded_key: ($) => $._identifier,
+        url_encoded_value: ($) => repeat1(choice(/[^&\r\n]/, $.variable_ref)),
         variable_declaration: ($) =>
             seq(
                 "@",
@@ -120,7 +115,7 @@ module.exports = grammar({
                     seq(",", optional($._nl), $._json_value, optional($._nl)),
                 ),
             ),
-        separator: () => token(prec(2, "###")),
+        separator: () => token(prec(20, "###")),
         response_start_line: ($) =>
             seq($.http_version, $.status_code, $.reason_phrase),
         http_version: () => seq("HTTP/", /[\d\.]+/),

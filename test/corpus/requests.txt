@@ -1,4 +1,15 @@
 =====================
+Simple request
+=====================
+POST http://localhost/
+
+---
+
+(source_file
+  (request
+   (start_line (method) (url (rest_of_line)))))
+
+=====================
 Multiple requests
 =====================
 POST http://localhost/
@@ -6,7 +17,6 @@ POST http://localhost/
 ###
 
 GET http://localhost/
-
 
 ---
 
