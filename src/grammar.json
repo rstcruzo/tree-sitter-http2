@@ -28,8 +28,17 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "_nl"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_nl"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "separator"
+              }
+            ]
           }
         }
       ]
@@ -903,6 +912,9 @@
     ],
     [
       "request"
+    ],
+    [
+      "source_file"
     ]
   ],
   "precedences": [],

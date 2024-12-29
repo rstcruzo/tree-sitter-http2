@@ -27,3 +27,24 @@ GET http://localhost/
   (request
    (start_line (method) (url (rest_of_line)))))
 
+=====================
+Multiple requests with a last separator
+=====================
+POST http://localhost/
+
+###
+
+GET http://localhost/
+
+###
+
+---
+
+(source_file
+  (request
+   (start_line (method) (url (rest_of_line))))
+  (separator)
+  (request
+   (start_line (method) (url (rest_of_line))))
+  (separator))
+
