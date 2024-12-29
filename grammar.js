@@ -64,17 +64,12 @@ module.exports = grammar({
         json_body: ($) => choice($.json_object, $.json_list),
         _key_value_list: ($) =>
             seq(
-                optional($._nl),
+                repeat($._nl),
                 $.json_key_value,
                 repeat(
-                    seq(
-                        optional($._nl),
-                        ",",
-                        optional($._nl),
-                        $.json_key_value,
-                    ),
+                    seq(repeat($._nl), ",", repeat($._nl), $.json_key_value),
                 ),
-                optional($._nl),
+                repeat($._nl),
             ),
         json_key_value: ($) =>
             seq(
@@ -100,7 +95,7 @@ module.exports = grammar({
             prec.left(
                 seq(
                     token(prec(5, "{")), // Precedence used to avoid raw_body to have preference
-                    optional(choice($._key_value_list, $._nl)),
+                    optional(choice($._key_value_list, repeat1($._nl))),
                     token(prec(5, "}")), // Precedence used to avoid raw_body to have preference
                 ),
             ),
@@ -108,24 +103,16 @@ module.exports = grammar({
             prec.left(
                 seq(
                     token(prec(5, "[")),
-                    optional(choice($._json_list_values, $._nl)),
+                    optional(choice($._json_list_values, repeat1($._nl))),
                     token(prec(5, "]")),
                 ),
             ),
         _json_list_values: ($) =>
             seq(
-                optional($._nl),
+                repeat($._nl),
                 $._json_value,
-                repeat(
-                    seq(
-                        optional($._nl),
-                        ",",
-                        optional($._nl),
-                        $._json_value,
-                        optional($._nl),
-                    ),
-                ),
-                optional($._nl),
+                repeat(seq(repeat($._nl), ",", repeat($._nl), $._json_value)),
+                repeat($._nl),
             ),
         separator: () => token(prec(20, "###")),
         response_start_line: ($) =>

@@ -23,6 +23,31 @@ POST http://localhost/
        (identifier) (null)))))))
 
 =====================
+Simple JSON body with new lines
+=====================
+POST http://localhost/
+
+{
+  "json_key": "json_value",
+
+  "json_other_key": null
+}
+
+
+---
+
+(source_file
+  (request
+   (start_line (method) (url (rest_of_line)))
+   (body
+    (json_body
+     (json_object
+      (json_key_value
+       (identifier) (string))
+      (json_key_value
+       (identifier) (null)))))))
+
+=====================
 Empty JSON body
 =====================
 POST http://localhost/
@@ -40,11 +65,48 @@ POST http://localhost/
     (json_body (json_object)))))
 
 =====================
+Empty JSON body with new line
+=====================
+POST http://localhost/
+
+{
+
+}
+
+
+---
+
+(source_file
+  (request
+   (start_line (method) (url (rest_of_line)))
+   (body
+    (json_body (json_object)))))
+
+
+=====================
 Empty JSON array
 =====================
 POST http://localhost/
 
 [
+]
+
+
+---
+
+(source_file
+  (request
+   (start_line (method) (url (rest_of_line)))
+   (body
+    (json_body (json_list)))))
+
+=====================
+Empty JSON array with new line
+=====================
+POST http://localhost/
+
+[
+
 ]
 
 
@@ -76,6 +138,26 @@ POST http://localhost/
     (json_body
      (json_list
       (string) (string))))))
+
+=====================
+JSON array with new lines
+=====================
+POST http://localhost/
+
+[
+  "one",
+
+  "two"
+]
+
+
+---
+
+(source_file
+  (request
+   (start_line (method) (url (rest_of_line)))
+   (body
+    (json_body (json_list (string) (string))))))
 
 =====================
 Larger JSON body
